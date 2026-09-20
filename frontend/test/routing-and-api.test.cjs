@@ -11,7 +11,12 @@ test('Vercel usage controls preserve the image proxy and heavily sample browsing
   const analyticsSource = read('src/components/analytics-tracker.tsx');
 
   assert.doesNotMatch(nextConfigSource, /images:\s*\{[\s\S]*unoptimized:\s*true/);
-  assert.match(nextConfigSource, /\{ protocol: 'http', hostname: '\*\*' \}/);
+  assert.match(nextConfigSource, /\{ protocol: 'http', hostname: 'storage\.googleapis\.com' \}/);
+  assert.match(nextConfigSource, /\{ protocol: 'https', hostname: 'firebasestorage\.googleapis\.com' \}/);
+  assert.doesNotMatch(nextConfigSource, /hostname: '\*\*'/);
+  assert.doesNotMatch(read('src/components/product-grid.tsx'), /<Image[^>]*\bunoptimized\b/);
+  assert.doesNotMatch(read('src/components/store-products-section.tsx'), /<Image[^>]*\bunoptimized\b/);
+  assert.doesNotMatch(read('src/app/products/[productId]/page.tsx'), /<Image[^>]*\bunoptimized\b/);
   assert.match(analyticsSource, /const BROWSING_SAMPLE_PERCENT = 1;/);
   assert.match(analyticsSource, /BROWSING_EVENTS\.has\(payload\.eventName\)/);
   assert.equal(fs.existsSync('src/app/api/web-vitals/route.ts'), false);

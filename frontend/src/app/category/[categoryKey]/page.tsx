@@ -130,7 +130,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
               <li key={product.id}>
                 <article style={{ display: 'grid', gap: 12, height: '100%', border: '1px solid #e2e8f0', borderRadius: 18, padding: 14, background: '#fff', boxShadow: '0 16px 35px -28px rgba(15, 23, 42, .75)' }}>
                   <Link href={productHref} style={{ display: 'block', position: 'relative', height: 210, overflow: 'hidden', borderRadius: 14, background: '#f1f5f9' }}>
-                    <Image src={getProductImage(product)} alt={product.productName} loading="lazy" unoptimized width={420} height={320} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <Image src={getProductImage(product)} alt={product.productName} loading="lazy" width={420} height={320} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </Link>
 
                   <div style={{ display: 'grid', gap: 8 }}>

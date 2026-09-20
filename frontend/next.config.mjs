@@ -4,8 +4,11 @@ const nextConfig = {
   poweredByHeader: false,
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: '**' },
-      { protocol: 'http', hostname: '**' },
+      { protocol: 'https', hostname: 'storage.googleapis.com' },
+      { protocol: 'http', hostname: 'storage.googleapis.com' },
+      { protocol: 'https', hostname: 'firebasestorage.googleapis.com' },
+      { protocol: 'http', hostname: 'firebasestorage.googleapis.com' },
+      { protocol: 'https', hostname: 'placehold.co' },
     ],
     formats: ['image/avif', 'image/webp'],
   },

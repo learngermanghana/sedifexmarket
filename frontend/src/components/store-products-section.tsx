@@ -245,7 +245,7 @@ export function StoreProductsSection({ storeId, storeName }: StoreProductsSectio
           const category = getCategory(product);
           return (
             <article key={product.id} className="card">
-              <div className="imageWrap"><Image src={imageUrl} alt={product.imageAlt?.trim() || getProductName(product)} width={360} height={360} unoptimized style={{ width: '100%', height: 'auto' }} /></div>
+              <div className="imageWrap"><Image src={imageUrl} alt={product.imageAlt?.trim() || getProductName(product)} width={360} height={360} style={{ width: '100%', height: 'auto' }} /></div>
               <h3>{getProductName(product)}</h3>
               <p>{formatPrice(product.price, product.currency)}</p>
               {category ? <p className="trustScoreCard">{category}</p> : null}
@@ -264,7 +264,7 @@ export function StoreProductsSection({ storeId, storeName }: StoreProductsSectio
             const imageUrl = getDisplayImages(service)[0] ?? 'https://placehold.co/640x640';
             return (
               <article key={service.id} className="card">
-                <div className="imageWrap"><Image src={imageUrl} alt={service.imageAlt?.trim() || getProductName(service)} width={360} height={360} unoptimized style={{ width: '100%', height: 'auto' }} /></div>
+                <div className="imageWrap"><Image src={imageUrl} alt={service.imageAlt?.trim() || getProductName(service)} width={360} height={360} style={{ width: '100%', height: 'auto' }} /></div>
                 <h3>{getProductName(service)}</h3>
                 <p>{formatPrice(service.price, service.currency)}</p>
                 <div className="cardActions"><StoreProductAction product={service} imageUrl={imageUrl} storeId={storeId} storeName={storeName} /><Link href={getProductHref(service.id, service.productName ?? service.name)} className="contactStoreButton">View details</Link></div>
@@ -280,7 +280,7 @@ export function StoreProductsSection({ storeId, storeName }: StoreProductsSectio
             const imageUrl = getDisplayImages(course)[0] ?? 'https://placehold.co/640x640';
             return (
               <article key={course.id} className="card">
-                <div className="imageWrap"><Image src={imageUrl} alt={course.imageAlt?.trim() || getProductName(course)} width={360} height={360} unoptimized style={{ width: '100%', height: 'auto' }} /></div>
+                <div className="imageWrap"><Image src={imageUrl} alt={course.imageAlt?.trim() || getProductName(course)} width={360} height={360} style={{ width: '100%', height: 'auto' }} /></div>
                 <h3>{getProductName(course)}</h3>
                 <p>{formatPrice(course.price, course.currency)}</p>
                 {course.duration ? <p><strong>Duration:</strong> {course.duration}</p> : null}
@@ -301,7 +301,7 @@ export function StoreProductsSection({ storeId, storeName }: StoreProductsSectio
             const startLabel = formatDateTime(event.startAt);
             return (
               <article key={event.id} className="card">
-                <div className="imageWrap"><Image src={imageUrl} alt={event.imageAlt?.trim() || getProductName(event)} width={360} height={360} unoptimized style={{ width: '100%', height: 'auto' }} /></div>
+                <div className="imageWrap"><Image src={imageUrl} alt={event.imageAlt?.trim() || getProductName(event)} width={360} height={360} style={{ width: '100%', height: 'auto' }} /></div>
                 <h3>{getProductName(event)}</h3>
                 {startLabel ? <p><strong>Starts:</strong> {startLabel}</p> : null}
                 {event.capacity != null ? <p><strong>Capacity:</strong> {event.capacity}</p> : null}
