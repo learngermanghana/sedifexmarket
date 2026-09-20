@@ -6,6 +6,16 @@ function read(path) {
   return fs.readFileSync(path, 'utf8');
 }
 
+test('Vercel usage controls bypass image transforms and heavily sample browsing analytics', () => {
+  const nextConfigSource = read('next.config.mjs');
+  const analyticsSource = read('src/components/analytics-tracker.tsx');
+
+  assert.match(nextConfigSource, /images:\s*\{[\s\S]*unoptimized:\s*true/);
+  assert.match(analyticsSource, /const BROWSING_SAMPLE_PERCENT = 1;/);
+  assert.match(analyticsSource, /BROWSING_EVENTS\.has\(payload\.eventName\)/);
+  assert.equal(fs.existsSync('src/app/api/web-vitals/route.ts'), false);
+});
+
 test('product routes support slug + id links and id extraction', () => {
   const productRouteSource = read('src/lib/product-route.ts');
   const gridSource = read('src/components/product-grid.tsx');
