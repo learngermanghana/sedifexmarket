@@ -15,6 +15,7 @@ import { extractProductIdFromRouteParam, getProductHref } from '@/lib/product-ro
 import { getFulfillmentOptions } from '@/lib/fulfillment-options';
 import { listIntegrationProducts } from '@/lib/sedifex-integration-api';
 import { RelatedMarketplaceItems } from '@/components/related-marketplace-items';
+import { getOptimizableImageSource } from '@/lib/next-image-source';
 
 type ProductPageProps = {
   params: { productId: string };
@@ -254,7 +255,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             {product.imageUrls.length > 0 ? (
               <section className="productImageGrid" aria-label="Product images">
                 {product.imageUrls.map((imageUrl) => (
-                  <Image key={imageUrl} src={imageUrl} alt={product.imageAlt?.trim() || `${product.productName} at ${resolvedStoreName}`} loading="lazy" className="productDetailImage" width={480} height={480} sizes="(max-width: 768px) 100vw, 33vw" />
+                  <Image key={imageUrl} src={getOptimizableImageSource(imageUrl)} alt={product.imageAlt?.trim() || `${product.productName} at ${resolvedStoreName}`} loading="lazy" className="productDetailImage" width={480} height={480} sizes="(max-width: 768px) 100vw, 33vw" />
                 ))}
               </section>
             ) : null}

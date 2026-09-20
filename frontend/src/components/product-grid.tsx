@@ -20,12 +20,13 @@ import { db, firebaseConfigError } from '@/lib/firebase';
 import { getProductHref } from '@/lib/product-route';
 import { getStoreHref } from '@/lib/store-route';
 import { resolveClosestCategoryKey } from '@/lib/category-taxonomy';
+import { getOptimizableImageSource, NEXT_IMAGE_PLACEHOLDER } from '@/lib/next-image-source';
 import './product-grid.css';
 
 const PRIMARY_COLLECTION = 'publicListings';
 const LEGACY_COLLECTIONS = ['publicProducts', 'publicServices'] as const;
 const MARKETPLACE_COLLECTIONS = [PRIMARY_COLLECTION, ...LEGACY_COLLECTIONS] as const;
-const PLACEHOLDER_IMAGE = 'https://placehold.co/640x640/172033/ffffff?text=Sedifex+Market';
+const PLACEHOLDER_IMAGE = NEXT_IMAGE_PLACEHOLDER;
 const PAGE_SIZE = 24;
 const FULL_PAGE_QUERY_LIMIT = 720;
 const PREVIEW_QUERY_LIMIT = 48;
@@ -203,7 +204,7 @@ const getDisplayImage = (item: PublicProduct) => {
     .flatMap((value) => decodeImageValues(value))
     .map(normalizeImageCandidate)
     .filter(isDisplayableImageUrl);
-  return Array.from(new Set(candidates))[0] ?? PLACEHOLDER_IMAGE;
+  return getOptimizableImageSource(Array.from(new Set(candidates))[0], PLACEHOLDER_IMAGE);
 };
 
 const isPublicListing = (item: PublicProduct) => {
