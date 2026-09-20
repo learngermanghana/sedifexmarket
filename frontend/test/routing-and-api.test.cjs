@@ -17,6 +17,14 @@ test('Vercel usage controls preserve the image proxy and heavily sample browsing
   assert.doesNotMatch(read('src/components/product-grid.tsx'), /<Image[^>]*\bunoptimized\b/);
   assert.doesNotMatch(read('src/components/store-products-section.tsx'), /<Image[^>]*\bunoptimized\b/);
   assert.doesNotMatch(read('src/app/products/[productId]/page.tsx'), /<Image[^>]*\bunoptimized\b/);
+  const imageSourceHelper = read('src/lib/next-image-source.ts');
+  assert.match(imageSourceHelper, /OPTIMIZED_REMOTE_IMAGE_ORIGINS/);
+  assert.match(imageSourceHelper, /return OPTIMIZED_REMOTE_IMAGE_ORIGINS\.has\(parsed\.origin\) \? source : fallback/);
+  assert.match(read('src/components/product-grid.tsx'), /getOptimizableImageSource\(Array\.from\(new Set\(candidates\)\)\[0\]/);
+  assert.match(read('src/components/store-products-section.tsx'), /getOptimizableImageSource\(getDisplayImages\(product\)\[0\]\)/);
+  assert.match(read('src/components/related-marketplace-items.tsx'), /getOptimizableImageSource\(getImage\(item\)\)/);
+  assert.match(read('src/app/category/[categoryKey]/page.tsx'), /getOptimizableImageSource\(product\.imageUrls\[0\]/);
+  assert.match(read('src/app/products/[productId]/page.tsx'), /src=\{getOptimizableImageSource\(imageUrl\)\}/);
   assert.match(analyticsSource, /const BROWSING_SAMPLE_PERCENT = 1;/);
   assert.match(analyticsSource, /BROWSING_EVENTS\.has\(payload\.eventName\)/);
   assert.equal(fs.existsSync('src/app/api/web-vitals/route.ts'), false);

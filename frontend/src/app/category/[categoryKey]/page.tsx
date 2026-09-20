@@ -6,6 +6,7 @@ import { getProductsByCategory, listPublicCategoryKeys } from '@/lib/public-stor
 import { getProductHref } from '@/lib/product-route';
 import { getStoreHref } from '@/lib/store-route';
 import { buildSeoKeywords, canonicalUrlForPath, categoryNameFromKey, defaultSocialImageUrl } from '@/lib/seo';
+import { getOptimizableImageSource } from '@/lib/next-image-source';
 
 type CategoryPageProps = {
   params: { categoryKey: string };
@@ -33,7 +34,7 @@ const formatMoney = (price?: number, currency?: string) => {
   return `${symbol} ${price.toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 };
 
-const getProductImage = (product: PublicProductDetail) => product.imageUrls[0] ?? PLACEHOLDER_IMAGE;
+const getProductImage = (product: PublicProductDetail) => getOptimizableImageSource(product.imageUrls[0], PLACEHOLDER_IMAGE);
 
 const getProductCity = (product: PublicProductDetail) =>
   product.publicLocationCity ?? product.deliveryOriginCity ?? product.city ?? product.publicLocationArea ?? product.deliveryOriginArea ?? product.area ?? 'Ghana';

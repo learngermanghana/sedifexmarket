@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useMemo } from 'react';
 import { getProductHref } from '@/lib/product-route';
+import { getOptimizableImageSource } from '@/lib/next-image-source';
 
 type MarketplaceItem = {
   id: string;
@@ -179,7 +180,7 @@ export function RelatedMarketplaceItems(props: RelatedMarketplaceItemsProps) {
           <h2>{section.name}</h2>
           <div className="relatedMarketplaceGrid">
             {section.items.map((item, index) => {
-              const imageUrl = getImage(item) || 'https://placehold.co/640x640?text=Sedifex';
+              const imageUrl = getOptimizableImageSource(getImage(item));
               return (
                 <article key={`${section.name}-${item.id}`} className="relatedMarketplaceCard">
                   <div className="relatedMarketplaceImageWrap"><Image src={imageUrl} alt={getName(item)} width={360} height={360} className="relatedMarketplaceImage" /></div>

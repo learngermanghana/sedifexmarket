@@ -8,6 +8,7 @@ import { useCart } from '@/components/cart-provider';
 import { db, firebaseConfigError } from '@/lib/firebase';
 import { getProductHref } from '@/lib/product-route';
 import { resolveClosestCategoryKey } from '@/lib/category-taxonomy';
+import { getOptimizableImageSource } from '@/lib/next-image-source';
 
 type StoreProduct = {
   id: string;
@@ -241,7 +242,7 @@ export function StoreProductsSection({ storeId, storeName }: StoreProductsSectio
       {productListings.length > 0 ? <h3>Products ({productListings.length})</h3> : null}
       <div className="grid">
         {productListings.map((product) => {
-          const imageUrl = getDisplayImages(product)[0] ?? 'https://placehold.co/640x640';
+          const imageUrl = getOptimizableImageSource(getDisplayImages(product)[0]);
           const category = getCategory(product);
           return (
             <article key={product.id} className="card">
@@ -261,7 +262,7 @@ export function StoreProductsSection({ storeId, storeName }: StoreProductsSectio
       {serviceListings.length > 0 ? (
         <div className="grid">
           {serviceListings.map((service) => {
-            const imageUrl = getDisplayImages(service)[0] ?? 'https://placehold.co/640x640';
+            const imageUrl = getOptimizableImageSource(getDisplayImages(service)[0]);
             return (
               <article key={service.id} className="card">
                 <div className="imageWrap"><Image src={imageUrl} alt={service.imageAlt?.trim() || getProductName(service)} width={360} height={360} style={{ width: '100%', height: 'auto' }} /></div>
@@ -277,7 +278,7 @@ export function StoreProductsSection({ storeId, storeName }: StoreProductsSectio
       {courseListings.length > 0 ? (
         <div className="grid">
           {courseListings.map((course) => {
-            const imageUrl = getDisplayImages(course)[0] ?? 'https://placehold.co/640x640';
+            const imageUrl = getOptimizableImageSource(getDisplayImages(course)[0]);
             return (
               <article key={course.id} className="card">
                 <div className="imageWrap"><Image src={imageUrl} alt={course.imageAlt?.trim() || getProductName(course)} width={360} height={360} style={{ width: '100%', height: 'auto' }} /></div>
@@ -297,7 +298,7 @@ export function StoreProductsSection({ storeId, storeName }: StoreProductsSectio
       {upcomingEvents.length > 0 ? (
         <div className="grid">
           {upcomingEvents.map((event) => {
-            const imageUrl = getDisplayImages(event)[0] ?? 'https://placehold.co/640x640';
+            const imageUrl = getOptimizableImageSource(getDisplayImages(event)[0]);
             const startLabel = formatDateTime(event.startAt);
             return (
               <article key={event.id} className="card">
