@@ -3,10 +3,6 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
-    // Marketplace images already live on the merchants' CDNs. Serving them
-    // directly avoids consuming Vercel Image Optimization transformations and
-    // cache writes for an effectively unbounded set of merchant URLs.
-    unoptimized: true,
     remotePatterns: [
       { protocol: 'https', hostname: '**' },
       { protocol: 'http', hostname: '**' },
