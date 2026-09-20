@@ -182,7 +182,7 @@ export function RelatedMarketplaceItems(props: RelatedMarketplaceItemsProps) {
               const imageUrl = getImage(item) || 'https://placehold.co/640x640?text=Sedifex';
               return (
                 <article key={`${section.name}-${item.id}`} className="relatedMarketplaceCard">
-                  <div className="relatedMarketplaceImageWrap"><Image src={imageUrl} alt={getName(item)} width={360} height={360} unoptimized className="relatedMarketplaceImage" /></div>
+                  <div className="relatedMarketplaceImageWrap"><Image src={imageUrl} alt={getName(item)} width={360} height={360} className="relatedMarketplaceImage" /></div>
                   <p className="eyebrow">{getBadge(item)}</p>
                   <h3>{getName(item)}</h3>
                   <p>{item.storeName || 'Unknown store'} · {getCategory(item)}</p>

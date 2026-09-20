@@ -615,7 +615,7 @@ export function ProductGrid({
               return (
                 <article key={item.id} className="card">
                   <Link href={itemHref} className="imageWrap">
-                    <Image src={getDisplayImage(item)} alt={item.imageAlt?.trim() || productName} loading="lazy" unoptimized width={360} height={360} sizes="(max-width: 768px) 112px, (max-width: 1200px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <Image src={getDisplayImage(item)} alt={item.imageAlt?.trim() || productName} loading="lazy" width={360} height={360} sizes="(max-width: 768px) 112px, (max-width: 1200px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </Link>
                   <div className="cardBody">
                     <div className="badgeRow">
