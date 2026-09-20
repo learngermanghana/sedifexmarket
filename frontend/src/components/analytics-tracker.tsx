@@ -41,7 +41,10 @@ const VISITOR_KEY = 'sedifex_market_visitor_id';
 const SESSION_KEY = 'sedifex_market_session_id';
 const SESSION_STARTED_KEY = 'sedifex_market_session_started_at';
 const SESSION_TTL_MS = 30 * 60 * 1000;
-const BROWSING_SAMPLE_PERCENT = 10;
+// Browsing events are useful for directional analytics, but every event also
+// invokes a Vercel Function. Keep conversion events lossless and use a stable
+// per-session 1% sample for high-volume browsing events.
+const BROWSING_SAMPLE_PERCENT = 1;
 const DUPLICATE_EVENT_WINDOW_MS = 2500;
 const BROWSING_EVENTS = new Set<AnalyticsEventName>([
   'page_view',

@@ -64,7 +64,9 @@ Example document:
 
 ## Performance and Core Web Vitals
 
-We added a built-in web-vitals reporter (`src/components/web-vitals-reporter.tsx`) that logs metrics in dev and posts them to `/api/web-vitals` in production for collection.
+Core Web Vitals should be monitored with Vercel's platform tooling or local Lighthouse runs. The former per-visit `/api/web-vitals` reporter was removed to avoid a serverless invocation for every browser metric.
+
+Remote marketplace images are intentionally served from their source CDN instead of Vercel Image Optimization. This avoids transformation usage for the marketplace's unbounded merchant image catalog. High-volume browsing analytics use a stable 1% session sample, while conversion events continue to be recorded without sampling.
 
 To generate a local Core Web Vitals report with Lighthouse:
 
