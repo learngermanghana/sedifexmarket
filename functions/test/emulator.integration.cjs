@@ -30,6 +30,7 @@ async function waitFor(checkFn, timeoutMs = 15000) {
     storeStatus: 'active',
     eligibleForBuy: true,
     buyOptOut: false,
+    marketplaceApproved: true,
     whatsappNumber: '+12025550100',
   });
 
