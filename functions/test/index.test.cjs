@@ -5,7 +5,7 @@ const mod = require('../lib/index.js');
 const t = mod.__testing;
 
 test('visibility matrix: visible path', () => {
-  const store = t.withStoreDefaults({ storeStatus: 'active', eligibleForBuy: true, buyOptOut: false });
+  const store = t.withStoreDefaults({ storeStatus: 'active', eligibleForBuy: true, buyOptOut: false, marketplaceApproved: true });
   assert.equal(t.computeVisibility(store, { itemType: 'product', name: 'Sample' }), true);
 });
 
@@ -58,7 +58,7 @@ test('upsert/delete sync behavior', async () => {
   await t.upsertOrDeletePublicProduct({
     storeId: 's1',
     productId: 'p2',
-    store: { storeStatus: 'active', eligibleForBuy: true, buyOptOut: false, name: 'Store', phone: '+233201111111' },
+    store: { storeStatus: 'active', eligibleForBuy: true, buyOptOut: false, marketplaceApproved: true, name: 'Store', phone: '+233201111111' },
     product: { name: 'Rice', itemType: 'product' },
   });
 
